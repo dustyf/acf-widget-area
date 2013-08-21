@@ -17,7 +17,7 @@ Add-on to Advanced custom fields giving you a field to display Widget Areas.
 
 This add-on will work with:
 
-* Advanced Custom Fiedls version 4 and up
+* Advanced Custom Fields version 4 and up
 
 == Installation ==
 
