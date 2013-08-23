@@ -16,7 +16,7 @@ Easily add and change Widget Areas on any page template using Advanced Custom Fi
 
 = This Plugin Requires Advanced Custom Fields Version 4 or Higher =
 
-Advanced Custom Fields can be found in the [WordPress Plugin Repsository Here](http://wordpress.org/plugins/advanced-custom-fields/).
+Advanced Custom Fields can be found in the [WordPress Plugin Repository Here](http://wordpress.org/plugins/advanced-custom-fields/).
 
 = Compatibility =
 
