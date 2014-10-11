@@ -10,36 +10,42 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
-
-class acf_field_widget_area_plugin
-{
-	/*
-	*  Construct
-	*
-	*  @description:
-	*  @since: 3.6
-	*  @created: 1/04/13
-	*/
-
-	function __construct()
-	{
-		// version 4+
-		add_action('acf/register_fields', array($this, 'register_fields'));
-	}
-
-	/*
-	*  register_fields
-	*
-	*  @description:
-	*  @since: 3.6
-	*  @created: 1/04/13
-	*/
-
-	function register_fields()
-	{
-		include_once('widget-area-v4.php');
-	}
-
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-new acf_field_widget_area_plugin();
+// Check if class exists, only run code if it does not
+if ( ! class_exists( 'acf_field_widget_area_plugin' ) ) {
+
+	class acf_field_widget_area_plugin {
+		/*
+		*  Construct
+		*
+		*  @description:
+		*  @since: 3.6
+		*  @created: 1/04/13
+		*/
+
+		function __construct() {
+			// version 4+
+			add_action( 'acf/register_fields', array( $this, 'register_fields' ) );
+		}
+
+		/*
+		*  register_fields
+		*
+		*  @description:
+		*  @since: 3.6
+		*  @created: 1/04/13
+		*/
+
+		function register_fields() {
+			include_once( 'widget-area-v4.php' );
+		}
+
+	}
+
+	new acf_field_widget_area_plugin();
+
+}
