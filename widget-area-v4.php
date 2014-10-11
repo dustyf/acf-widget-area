@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Check if class exists, only run code if it does not
-if ( ! class_exists( 'Sample_Plugin' ) ) {
+if ( ! class_exists( 'acf_field_widget_area' ) ) {
 
 	class acf_field_widget_area extends acf_field {
 
