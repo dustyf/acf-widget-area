@@ -127,6 +127,11 @@ if ( ! class_exists( 'acf_field_widget_area' ) ) {
 		 */
 		function format_value_for_api( $value, $post_id, $field ) {
 
+			// bail early if no value
+			if( empty($value) ) {
+				return $value;
+			}
+
 			ob_start();
 			if ( is_active_sidebar( $value ) ) :
 				echo '<div id="' . esc_attr( $field['id'] ) . '" class="acf-widget-area ' . esc_attr( $field['name'] ) . '" role="complementary">';
