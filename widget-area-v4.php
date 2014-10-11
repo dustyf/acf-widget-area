@@ -15,28 +15,23 @@ if ( ! class_exists( 'Sample_Plugin' ) ) {
 			$defaults; // will hold default field options
 
 
-		/*
-		*  __construct
-		*
-		*  Set name / label needed for actions / filters
-		*
-		*  @since	3.6
-		*  @date	23/01/13
-		*/
-
+		/**
+		 *  Setting everything up
+		 *
+		 *  @since	3.6
+		 */
 		function __construct() {
+
 			// vars
 			$this->name     = 'widget_area';
-			$this->label    = __( 'Widget Area' );
-			$this->category = __( "Content", 'acf' ); // Basic, Content, Choice, etc
+			$this->label    = __( 'Widget Area', 'acf_widget_area' );
+			$this->category = __( 'Content', 'acf' ); // Basic, Content, Choice, etc
 			$this->defaults = array(
-				'allow_null' => 0
+				'allow_null' => 0,
 			);
-
 
 			// do not delete!
 			parent::__construct();
-
 
 			// settings
 			$this->settings = array(
@@ -48,20 +43,14 @@ if ( ! class_exists( 'Sample_Plugin' ) ) {
 		}
 
 
-		/*
-		*  create_options()
-		*
-		*  Create extra options for your field. This is rendered when editing a field.
-		*  The value of $field['name'] can be used (like bellow) to save extra data to the $field
-		*
-		*  @type	action
-		*  @since	3.6
-		*  @date	23/01/13
-		*
-		*  @param	$field	- an array holding all the field's data
-		*/
-
+		/**
+		 *  Create extra options for your field. This is rendered when editing a field.
+		 *  The value of $field['name'] can be used (like bellow) to save extra data to the $field
+		 *
+		 *  @param	$field	- an array holding all the field's data
+		 */
 		function create_options( $field ) {
+
 			// defaults?
 			$field = array_merge( $this->defaults, $field );
 
@@ -71,8 +60,7 @@ if ( ! class_exists( 'Sample_Plugin' ) ) {
 
 			// Create Field Options HTML
 			?>
-
-			<tr class="field_option field_option_<?php echo $this->name; ?>">
+			<tr class="field_option field_option_<?php echo esc_attr( $this->name ); ?>">
 				<td class="label">
 					<label><?php _e( "Allow Null?", 'acf' ); ?></label>
 				</td>
@@ -91,26 +79,21 @@ if ( ! class_exists( 'Sample_Plugin' ) ) {
 					?>
 				</td>
 			</tr>
-		<?php
+			<?php
 
 		}
 
 
-		/*
-		*  create_field()
-		*
-		*  Create the HTML interface for your field
-		*
-		*  @param	$field - an array holding all the field's data
-		*
-		*  @type	action
-		*  @since	3.6
-		*  @date	23/01/13
-		*/
+		/**
+		 *  Create the HTML interface for your field
+		 *
+		 *  @param	$field - an array holding all the field's data
+		 */
 
 		function create_field( $field ) {
+
 			// create Field HTML
-			echo sprintf( '<select id="%d" class="%s" name="%s">', $field['id'], $field['class'], $field['name'] );
+			echo sprintf( '<select id="%d" class="%s" name="%s">', esc_attr( $field['id'] ), esc_attr( $field['class'] ), esc_attr( $field['name'] ) );
 
 			// null
 			if ( $field['allow_null'] ) {
@@ -127,29 +110,21 @@ if ( ! class_exists( 'Sample_Plugin' ) ) {
 
 			foreach ( $widget_areas as $widget_area ) {
 				$selected = selected( $field['value'], $widget_area['id'] );
-				echo sprintf( '<option value="%1$s" %3$s>%2$s</option>', $widget_area['id'], $widget_area['name'], $selected );
+				echo sprintf( '<option value="%1$s" %3$s>%2$s</option>', esc_attr( $widget_area['id'] ), esc_attr( $widget_area['name'] ), $selected );
 			}
 
 			echo '</select>';
 		}
 
-		/*
-		*  format_value_for_api()
-		*
-		*  This filter is appied to the $value after it is loaded from the db and before it is passed back to the api functions such as the_field
-		*
-		*  @type	filter
-		*  @since	3.6
-		*  @date	23/01/13
-		*
-		*  @param	$value	- the value which was loaded from the database
-		*  @param	$post_id - the $post_id from which the value was loaded
-		*  @param	$field	- the field array holding all the field options
-		*
-		*  @return	$value	- the modified value
-		*/
-
+		/**
+		 *  This filter is appied to the $value after it is loaded from the db and before it is passed back to the api functions such as the_field
+		 *
+		 *  @param	$value	- the value which was loaded from the database
+		 *  @param	$post_id - the $post_id from which the value was loaded
+		 *  @param	$field	- the field array holding all the field options
+		 */
 		function format_value_for_api( $value, $post_id, $field ) {
+
 			$value = '';
 			if ( is_active_sidebar( $field['value'] ) ) :
 				$value .= '<div id="secondary" class="widget-area" role="complementary">';
@@ -158,6 +133,7 @@ if ( ! class_exists( 'Sample_Plugin' ) ) {
 			endif;
 
 			return $value;
+
 		}
 
 	}
