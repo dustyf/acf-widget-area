@@ -44,7 +44,14 @@ if ( ! class_exists( 'acf_field_widget_area_plugin' ) ) {
 			 */
 			add_action( 'admin_notices', array( $this, 'maybe_disable_plugin' ) );
 
-			// version 4+
+			/**
+			 * Add action for version 5
+			 */
+			add_action( 'acf/include_field_types', array( $this, 'include_field_type' ) );
+
+			/**
+			 * Add action for version 4
+			 */
 			add_action( 'acf/register_fields', array( $this, 'register_fields' ) );
 
 		}
@@ -89,6 +96,17 @@ if ( ! class_exists( 'acf_field_widget_area_plugin' ) ) {
 
 		}
 
+		/**
+		 * Include field type for ACF v5
+		 *
+		 * @param $version
+		 */
+		function include_field_type( $version ) {
+
+			include_once( $this->directory_path . '/widget-area-v5.php' );
+
+		}
+
 		/*
 		*  register_fields
 		*
@@ -97,7 +115,7 @@ if ( ! class_exists( 'acf_field_widget_area_plugin' ) ) {
 
 		function register_fields() {
 
-			include_once( $this->directory_path . 'widget-area-v4.php' );
+			include_once( $this->directory_path . '/widget-area-v4.php' );
 
 		}
 
