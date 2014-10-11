@@ -22,26 +22,83 @@ if ( ! class_exists( 'acf_field_widget_area_plugin' ) ) {
 		/*
 		*  Construct
 		*
-		*  @description:
-		*  @since: 3.6
-		*  @created: 1/04/13
+		*  @since: 1.0.0
 		*/
 
 		function __construct() {
+
+			/**
+			 * Setup some base variables for the plugin
+			 */
+			$this->basename       = plugin_basename( __FILE__ );
+			$this->directory_path = plugin_dir_path( __FILE__ );
+			$this->directory_url  = plugins_url( dirname( $this->basename ) );
+
+			/**
+			 * Load Textdomain
+			 */
+			load_plugin_textdomain( 'acf_widget_area', false, dirname( $this->basename ) . '/languages' );
+
+			/**
+			 * Make sure we have our requirements, and disable the plugin if we do not have them.
+			 */
+			add_action( 'admin_notices', array( $this, 'maybe_disable_plugin' ) );
+
 			// version 4+
 			add_action( 'acf/register_fields', array( $this, 'register_fields' ) );
+
+		}
+
+		/**
+		 * Check that all plugin requirements are met
+		 *
+		 * @since  1.0.0
+		 *
+		 * @return bool
+		 */
+		public static function meets_requirements() {
+			/**
+			 * If the main acf class doesn't exist, our plugin won't work.
+			 */
+			if( ! class_exists( 'acf' ) ) {
+				return false;
+			}
+
+			/**
+			 * We have met all requirements
+			 */
+			return true;
+		}
+
+		/**
+		 * Check if the plugin meets requirements and disable it if they are not present.
+		 *
+		 * @since 1.0.0
+		 */
+		public function maybe_disable_plugin() {
+
+			if ( ! $this->meets_requirements() ) {
+				// Display our error
+				echo '<div id="message" class="error">';
+				echo '<p>' . sprintf( __( 'ACF Widget Area is missing requirements and has been <a href="%s">deactivated</a>. Please make sure all requirements are available.', 'acf_widget_area' ), admin_url( 'plugins.php' ) ) . '</p>';
+				echo '</div>';
+
+				// Deactivate our plugin
+				deactivate_plugins( $this->basename );
+			}
+
 		}
 
 		/*
 		*  register_fields
 		*
-		*  @description:
-		*  @since: 3.6
-		*  @created: 1/04/13
+		*  @since: 1.0.0
 		*/
 
 		function register_fields() {
-			include_once( 'widget-area-v4.php' );
+
+			include_once( $this->directory_path . 'widget-area-v4.php' );
+
 		}
 
 	}
