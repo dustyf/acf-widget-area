@@ -128,7 +128,7 @@ if ( ! class_exists( 'Sample_Plugin' ) ) {
 		function format_value_for_api( $value, $post_id, $field ) {
 
 			ob_start();
-			if ( is_active_sidebar( $field['value'] ) ) :
+			if ( is_active_sidebar( $value ) ) :
 				echo '<div id="' . esc_attr( $field['id'] ) . '" class="acf-widget-area ' . esc_attr( $field['name'] ) . '" role="complementary">';
 				dynamic_sidebar( $value );
 				echo '</div>';
