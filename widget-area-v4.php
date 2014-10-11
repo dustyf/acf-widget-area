@@ -122,17 +122,19 @@ if ( ! class_exists( 'Sample_Plugin' ) ) {
 		 *  @param	$value	- the value which was loaded from the database
 		 *  @param	$post_id - the $post_id from which the value was loaded
 		 *  @param	$field	- the field array holding all the field options
+		 *
+		 *  @return string The HTML value of the sidebar.
 		 */
 		function format_value_for_api( $value, $post_id, $field ) {
 
-			$value = '';
+			ob_start();
 			if ( is_active_sidebar( $field['value'] ) ) :
-				$value .= '<div id="secondary" class="widget-area" role="complementary">';
-				dynamic_sidebar( $field['value'] );
-				$value .= '</div><!-- #secondary -->';
+				echo '<div id="' . esc_attr( $field['id'] ) . '" class="acf-widget-area ' . esc_attr( $field['name'] ) . '" role="complementary">';
+				dynamic_sidebar( $value );
+				echo '</div>';
 			endif;
 
-			return $value;
+			return ob_get_clean();
 
 		}
 
