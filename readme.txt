@@ -3,7 +3,7 @@ Contributors: dustyf
 Donate Link: http://dustyf.com/donate
 Tags: advanced custom fields, acf, custom fields, widget, widgets, sidebar, sidebars, widget areas
 Requires at least: 3.4
-Tested up to: 3.6
+Tested up to: 4.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -43,8 +43,7 @@ This add-on can be treated as both a WP plugin and a theme include.
 `
 add_action('acf/register_fields', 'my_register_fields');
 
-function my_register_fields()
-{
+function my_register_fields() {
 	include_once('acf-widget_area/acf-widget_area.php');
 }
 `
@@ -71,3 +70,5 @@ Currently not available.
 
 = 0.0.1 =
 * Initial Release.
+
+= 1.0.0 =

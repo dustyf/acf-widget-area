@@ -3,7 +3,7 @@
 Plugin Name: Advanced Custom Fields: Widget Area Field
 Plugin URI: https://github.com/dustyf/acf-widget-area
 Description: Adds a custom field allowing you to pick one of your widget areas (aka Sidebars) from WordPress
-Version: 0.0.1
+Version: 1.0.0
 Author: Dustin Filippini
 Author URI: http://dustyf.com
 License: GPLv2 or later
