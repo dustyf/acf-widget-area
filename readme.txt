@@ -8,11 +8,13 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Add-on to Advanced custom fields giving you a field to display Widget Areas.
+Add-on to Advanced Custom Fields giving you a field to display Widget Areas.
 
 == Description ==
 
 Easily add and change Widget Areas on any page template using Advanced Custom Fields and the Advanced Custom Fields: Widget Area Field plugin.  This plugin will add a field with a drop-down selection of all registered Widget Areas in your WordPress installation.  You can select which widget area you would like to display in your template files when using ACF's get_field and the_field functions.
+
+As of version 1.0, support for ACF v5 is included.
 
 = This Plugin Requires Advanced Custom Fields Version 4 or Higher =
 
@@ -37,8 +39,8 @@ This add-on can be treated as both a WP plugin and a theme include.
 2. Activate the plugin via the Plugins admin page
 
 = Include =
-1.	Copy the 'acf-widget_area' folder into your theme folder (can use sub folders). You can place the folder anywhere inside the 'wp-content' directory
-2.	Edit your functions.php file and add the code below (Make sure the path is correct to include the acf-widget_area.php file)
+1.	Copy the 'acf-widget_area' folder into your theme folder (can use sub folders).
+2.	Edit your functions.php file and add the code below (Make sure the path is correct to include the acf-widget_area.php file. You should also change my_register_fields function name to something unique.)
 
 `
 add_action('acf/register_fields', 'my_register_fields');
@@ -72,3 +74,9 @@ Currently not available.
 * Initial Release.
 
 = 1.0.0 =
+* Add ACF v5 support
+* Fixed an issue where it should have been buffering output
+* Adding some escaping, better spacing, commenting
+* Better translation support for the few strings included
+* Fix bugs preventing from being used in Repeater Fields
+* Add checks for ACF existing and other checks
