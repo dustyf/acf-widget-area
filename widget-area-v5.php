@@ -90,7 +90,7 @@ if ( ! class_exists( 'acf_5_field_widget_area' ) ) {
 
 			// null
 			if ( $field['allow_null'] ) {
-				echo '<option value="null"> - Select - </option>';
+				echo '<option value="null">' . _x( '- Select - ','ACF Widget Area Null Select Option', 'acf_widget_area' ) . '</option>';
 			}
 
 			global $wp_registered_sidebars;
