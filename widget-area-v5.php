@@ -63,10 +63,21 @@ if ( ! class_exists( 'acf_5_field_widget_area' ) ) {
 			acf_render_field_setting( $field, array(
 				'label'        => __( "Allow Null?", 'acf' ),
 				'type'         => 'radio',
-				'name'         => 'fields[' . $key . '][allow_null]',
+				'name'         => 'allow_null',
 				'choices' => array(
 					1 => __( "Yes", 'acf' ),
 					0 => __( "No", 'acf' ),
+				),
+				'layout'  => 'horizontal',
+			) );
+
+			acf_render_field_setting( $field, array(
+				'label'        => __( "Display Widget Area HTML or Return Widget Area Name", 'acf_widget_area' ),
+				'type'         => 'radio',
+				'name'         => 'display_or_return',
+				'choices' => array(
+					'display' => __( "Display Widget Area HTML", 'acf_widget_area' ),
+					'return'  => __( "Return Widget Name", 'acf_widget_area' ),
 				),
 				'layout'  => 'horizontal',
 			) );
@@ -126,6 +137,12 @@ if ( ! class_exists( 'acf_5_field_widget_area' ) ) {
 			if( empty($value) ) {
 				return $value;
 			}
+
+			// If selected to return the name, we will do that now.
+			if ( 'return' == $field['display_or_return'] ) {
+				return esc_attr( $value );
+			}
+
 
 			ob_start();
 			if ( is_active_sidebar( $value ) ) :

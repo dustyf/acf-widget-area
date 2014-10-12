@@ -69,10 +69,29 @@ if ( ! class_exists( 'acf_field_widget_area' ) ) {
 					do_action( 'acf/create_field', array(
 						'type'    => 'radio',
 						'name'    => 'fields[' . $key . '][allow_null]',
-						'value'   => $field['allow_null'],
+						'value'   => isset( $field['allow_null'] ) ? $field['allow_null'] : 0,
 						'choices' => array(
 							1 => __( "Yes", 'acf' ),
 							0 => __( "No", 'acf' ),
+						),
+						'layout'  => 'horizontal',
+					) );
+					?>
+				</td>
+			</tr>
+			<tr class="field_option field_option_<?php echo esc_attr( $this->name ); ?>">
+				<td class="label">
+					<label><?php _e( "Display Widget Area HTML or Return Widget Area Name", 'acf_widget_area' ); ?></label>
+				</td>
+				<td>
+					<?php
+					do_action( 'acf/create_field', array(
+						'type'    => 'radio',
+						'name'    => 'fields[' . $key . '][display_or_return]',
+						'value'   => isset( $field['display_or_return'] ) ? esc_attr( $field['display_or_return'] ) : 'display',
+						'choices' => array(
+							'display' => __( "Display Widget Area HTML", 'acf_widget_area' ),
+							'return'  => __( "Return Widget Name", 'acf_widget_area' ),
 						),
 						'layout'  => 'horizontal',
 					) );
@@ -130,6 +149,11 @@ if ( ! class_exists( 'acf_field_widget_area' ) ) {
 			// bail early if no value
 			if( empty($value) ) {
 				return $value;
+			}
+
+			// If selected to return the name, we will do that now.
+			if ( 'return' == $field['display_or_return'] ) {
+				return esc_attr( $value );
 			}
 
 			ob_start();
